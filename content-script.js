@@ -1,5 +1,7 @@
+let search;
+
 function getSearchTerm() {
-  let search = document.location.search;
+  search = document.location.search;
   if (search) {
     pairs = search.substring(1).split('&');
     for (let pair of pairs) {
@@ -10,7 +12,14 @@ function getSearchTerm() {
     }
   }
 }
-var div = document.createElement("div");
+
+function updateAnchor(anchor) {
+  if (document.location.search !== search) {
+    anchor.href = `https://www.google.com/search?q=${getSearchTerm()}`;
+  }
+}
+
+let div = document.createElement("div");
 document.body.appendChild(div);
 div.style.position = "fixed";
 div.style.bottom = "0px";
@@ -20,7 +29,10 @@ div.style.zIndex = "100";
 div.style.color = "hsla(146, 100%, 20%, 1.0)";
 div.style.backgroundColor = "#01FF70";
 
-var anchor = document.createElement("a");
+let anchor = document.createElement("a");
 div.appendChild(anchor);
 anchor.innerText = "Switch to Google";
-anchor.href = `https://www.google.com/search?q=${getSearchTerm()}`;
+updateAnchor(anchor);
+
+// Keep watching for URL changes
+setInterval(() => updateAnchor(anchor), 1000);

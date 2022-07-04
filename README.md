@@ -4,4 +4,4 @@ Bing to Google Chrome Extension
 TODO
 ----
 
-1. Update hyperlink when Bing search term changes
+1. Prepare the extension to be published
